@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	
+	   // 数组es5方法    
+
+	   //forEach(function(value,index,arr){},document)  第一个参数 回调函数   第二个参数 控制当前this指向谁
+
+	   let  arr = [1,2,3,4];
+
+	   arr.forEach(function(value,index,arr){
+	   		console.log(value,index,arr,this);
+
+	   },document)
+
+	   //map()  返回一个新数组  不影响原来的数组  一般配合return使用  没有return 跟forEach效果一样
+	   
+	   let arr1 = [
+	   		{name:"tom",age:18,hobby:"song"},
+	   		{name:"jack",age:28,hobby:"swimming"},
+	   		{name:"queen",age:19,hobby:"eat"},
+	   		{name:"mary",age:16,hobby:"sleep"}
+	   ]
+
+
+	   let newArr = arr1.map(function(value,index,arr){
+	   		let json ={};
+	   		json.n = value.name;
+	   		json.m = value.age;
+	   		json.l = value.hobby;
+
+	   		return json
+	   })
+
+	   console.log(newArr)
+
+
+	   //filter  过滤不符合条件的元素  参数 回调函数  回调函数返回true 则保留  为false 则过滤
+	   
+
+	   let arr2 = [
+	   		{name:"tom",age:18,hobby:"song"},
+	   		{name:"jack",age:28,hobby:"swimming"},
+	   		{name:"queen",age:19,hobby:"eat"},
+	   		{name:"mary",age:16,hobby:"sleep"}
+	   ]
+
+
+	   let newArr1 = arr2.filter(function(value,index,arr){
+	   		// return  value.name =="queen";
+	   		return  value.age>18;
+	   })
+
+	   console.log(newArr1)
+
+
+	   //some()   参数 回调函数  回调函数中只要有一个满足 则返回true  全部不满足 则返回false
+	   let arr3 = [
+	   		{name:"tom",age:18,hobby:"song"},
+	   		{name:"jack",age:28,hobby:"swimming"},
+	   		{name:"queen",age:19,hobby:"eat"},
+	   		{name:"mary",age:16,hobby:"sleep"}
+	   ]
+
+
+	   let newArr2 = arr3.some(function(value,index,arr){
+	   		// return  value.name =="queen";
+	   		return  value.age>28;
+	   })
+
+	   console.log(newArr2)
+
+
+	   //every()   与some()相对的  
+	   
+	   
+
+	   //reduce()    回调函数  有四个参数  prev之前计算过的值  next之前计算过的值的下一个的值  index  arr   类似于递归的操作  
+
+
+	   let result = arr.reduce(function(prev,next,index,arr){
+	   		console.log(prev+"||"+next)
+	   		return prev+next;
+	   })
+	   console.log(result)
+
+
+
+
+	  	// es6 Array.from() 把两类对象转换为数组   Array.of()    把一列值转换为数组
+
+	  	// 数组去重    es6 new Set()
+
+	  	var  arr5 = [1,2,3,4,1,2,3,4]
+
+	  	function unique(arr){
+	  		// return  Array.from(new Set(arr));
+	  		return [...new Set(arr)];
+	  	}
+
+	  	console.log(unique(arr5))
+
+	  	console.log(Array.of(1,2,3,4,5,110,22,56))
+
+	  	//原生
+
+	  	Array.prototype.unique1 = function(){
+	  		var n =[];//临时数组
+	  		for (var i = 0; i <this.length; i++) {
+	  			if (n.indexOf(this[i])==-1) {
+	  				n.push(this[i])	
+	  			}
+	  		}
+	  		return n;
+	  	}
+
+	  	Array.prototype.unique2 = function(){
+	  		var n =[];//临时数组
+	  		for (var i = 0; i <this.length; i++) {
+	  			//如果当前数组的第i项在当前数组中第一次出现的位置不是i  表示第i项是重复的 过滤掉  否则 推进去
+	  			if (this.indexOf(this[i])==i) {
+	  				n.push(this[i])	
+	  			}
+	  		}
+	  		return n;
+	  	}
+
+
+	  	Array.prototype.unique3 = function(){
+	  		var n ={},r=[];//临时表  临时数组
+	  		for (var i = 0; i <this.length; i++) {
+	  			//
+	  			if (!n[this[i]]) {//如果临时表中没有当前项
+	  				n[this[i]]=true;//存入临时表
+	  				r.push(this[i]);//存入临时数组
+	  			}
+	  		}
+	  		return r;
+	  	}	
+
+
+
+	  	console.log(arr5.unique1()+"----")
+	  	console.log(arr5.unique2()+"*****")
+	  	console.log(arr5.unique3()+"￥￥￥")
+
+//		使用数组进行栈（先进后出）push pop、队列（先进先出）操作  push  shift
+
+		//队列
+		// arr5.push(11)
+		// arr5.push(22)
+		// console.log(arr5)
+		// arr5.shift(22)
+		// console.log(arr5)
+		// arr5.shift(11)
+		// console.log(arr5)
+
+		//栈
+		arr5.push(11)
+		arr5.push(22)
+		console.log(arr5)
+		arr5.pop()
+		console.log(arr5)
+		arr5.pop()
+		console.log(arr5)
+
+
+		//把数组中最大值  最小值 找出来   算法中排序的基础
+
+		var  arr6 = [10,20,30,40,1,2,3,4,100];
+
+		// console.log(arr6.sort(function(a,b){return b-a}))
+
+
+		// var max = arr[0],min=arr[0];
+
+		function max(arr){
+			var max = arr[0];
+			for(var i in arr){
+				if (max<arr[i]) {
+					max = arr[i];
+				}
+			}
+			return max;
+		}
+
+
+		function min(arr){
+			var min = arr[0];
+			for(var i in arr){
+				if (min>arr[i]) {
+					min = arr[i];
+				}
+			}
+			return min;
+		}
+
+		console.log(max(arr6))
+		console.log(min(arr6))
+
+
+
+
+
+
+</script>
+</html>

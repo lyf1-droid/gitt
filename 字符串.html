@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	
+	//判断一个字符串是否是回文字符串  函数判断   level
+
+	// function isTrue(str){
+	// 	return  str == str.split("").reverse().join("");//不推荐
+	// }
+
+	//推荐方式
+	function isTrue1 (str) {
+		str+="";//str=str+"";
+		for (var i = 0,j=str.length-1; i < j; i++,j--) {
+			if (str.charAt(i)!== str.charAt(j)) {
+				return false
+			}
+		}
+		return true;					
+	}
+
+
+
+	console.log( isTrue1("level"))
+	console.log( isTrue1("leve"))
+
+
+	//10个糖果   三个人分   每人至少有一个  有多少种分法：
+		
+
+	   // 1  1  8
+	   // 。。。                
+	   // 1  8  1       8种方式	
+
+	   // 2  1  7
+	   // 。。。
+	   // 2  7  1       7种方式
+
+	   // 				 6   5    4   3   2  1  
+
+	   // var count = 0;
+
+	   // for (var i = 1; i <= 8; i++) {//一个人
+	   // 	for (var j = 1; j <= 8; j++) {//一个人
+	   // 		 for (var k = 1; k <= 8; k++) {//一个人
+	   // 			if (i+j+k==10) {
+	   // 				console.log("i="+i+"j="+j+"k="+k)
+	   // 				count++;
+	   // 			}
+	   // 		}
+	   // 	}
+	   // }
+
+	   // console.log("共计有"+count+"次方法")
+
+
+	   //百元买百鸡    公鸡5元一只    母鸡3元一只    小计一元三只  有多少种买法？
+	   
+	   // var count = 0;
+
+	   // for (var i = 0; i <= 100; i++) {//  执行了100万次
+	   // 	for (var j = 0; j <= 100; j++) {//
+	   // 		 for (var k = 0; k <= 100; k++) {//
+	   // 			if ((i+j+k==100)&&(i*5+j*3+k/3==100)) {
+	   // 				console.log("公鸡i="+i+"母鸡j="+j+"小鸡k="+k)
+	   // 				count++;
+	   // 			}
+	   // 		}
+	   // 	}
+	   // }
+
+	   // console.log("共计有"+count+"次方法")
+
+	   //优化  
+	   
+	    var count = 0;
+
+	   for (var i = 0; i <= 20; i++) {//  执行了660次
+	   	for (var j = 0; j <= 33; j++) {//
+	   		 	var k = 100-i-j;
+	   			if ((i+j+k==100)&&(i*5+j*3+k/3==100)) {
+	   				console.log("公鸡i="+i+"母鸡j="+j+"小鸡k="+k)
+	   				count++;
+	   			}
+	   		
+	   	}
+	   }
+
+	   console.log("共计有"+count+"次方法")
+
+
+	   //一个西瓜切三刀  最多分几块  8块
+	   
+
+
+	   //一根金条   一群长工干活   每天的报酬是七分之一根金条   只允许对金条切两次   每天都要给七分之一的金条  怎么给？
+	   
+
+
+	   
+
+</script>
+</html>
